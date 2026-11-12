@@ -1,0 +1,42 @@
+---
+title: Architecture
+description: Les frontières des produits et les données qui les traversent.
+---
+
+<ArchitectureDiagram locale="fr" />
+
+## Studio contrôle les publications
+
+Les équipes écrivent et simulent les décisions dans Studio, enregistrent des versions
+et assemblent des publications immuables. La production exige l’approbation d’un
+autre propriétaire. Studio publie des artefacts signés dans le stockage ; le Runtime
+les lit et les vérifie. Un jeton CLI donne un accès en lecture seule aux artefacts
+publiés et aux contrats d’entrée.
+
+## Le Runtime sert les décisions
+
+Les systèmes clients envoient des données JSON au Runtime et reçoivent la sortie JSON
+de la décision. Les connecteurs appellent uniquement les hôtes autorisés par
+l’installation. L’exploitant configure leurs identifiants ; les graphes ne les contiennent pas.
+
+Une fois une publication chargée, le Runtime n’a pas besoin de Studio à chaque
+évaluation. Il transmet les enregistrements de manière asynchrone. Sa mémoire
+tampon est bornée : la disponibilité ne signifie pas un stockage illimité pendant une panne.
+
+## Les enregistrements reviennent dans Studio
+
+Studio conserve les enregistrements pour la recherche et le rejeu. Les explications
+facultatives passent par le service de modèle de langage configuré par le client,
+avec masquage des données. Elles ne modifient ni le graphe ni la décision servie.
+
+## Outils et références
+
+Le CLI récupère les publications et contrats d’entrée pour les pipelines CI/CD.
+Son pont MCP local existe ; sa connexion à l’éditeur Studio reste prévue.
+Cette documentation est un site statique distinct. La référence API interactive
+de la version installée fait partie de la suite de ce travail documentaire.
+
+Fieldkit appartient à la Phase 2 et figure comme prévu dans le schéma.
+Il n’est pas nécessaire pour exploiter Studio, Runtime ou le CLI.
+
+Retour à [Découvrir Donka](../).
