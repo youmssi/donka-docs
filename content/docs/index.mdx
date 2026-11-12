@@ -1,0 +1,35 @@
+---
+title: Discover Donka
+description: Business rules you can author, test, release and review.
+---
+
+Donka is a self-hosted decision management platform. Teams write business rules
+as decision graphs, simulate them with examples, save versions and publish
+releases. Customer applications call a separate Runtime to evaluate those rules.
+
+The first pilot is for a bank or microfinance lender, but the platform is
+industry-neutral. Credit scoring, KYC checks and transaction limits are examples
+of decisions it can serve.
+
+## Who uses it
+
+- **Business teams** own the rules and test how a proposed change behaves.
+- **Reviewers** approve production releases. The author cannot approve their own release.
+- **Operators** install the products, manage keys and backups, and monitor the services.
+- **Developers** call the Runtime or pull released artifacts and input contracts with the CLI.
+
+## Three products
+
+**Studio** holds projects, editable drafts, saved versions, scenarios, releases,
+permissions and decision records. A production deployment requires approval;
+staging can be used to test a release before that approval.
+
+**Runtime** loads published release artifacts and answers requests over REST.
+It can keep serving a loaded release while Studio is unavailable. Decision records
+queue in a bounded buffer until Studio can receive them.
+
+**The donka CLI** pulls released artifacts and input contracts from Studio into
+a developer's delivery pipeline. It checks downloads and helps keep forms aligned
+with their input contracts.
+
+Read [Architecture](./architecture/) for the connections and trust boundaries.

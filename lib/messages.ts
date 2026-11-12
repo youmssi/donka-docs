@@ -1,0 +1,79 @@
+export const messages = {
+  en: {
+    documentation: 'Documentation',
+    development: 'Development version',
+    title: 'Understand how Donka fits together.',
+    lead: 'Author business rules in Studio, serve decisions through the Runtime, and keep the evidence needed to review them.',
+    read: 'Discover Donka',
+    architecture: 'Explore the architecture',
+    diagramTitle: 'How Donka connects',
+    diagramIntro: 'The Runtime serves your systems independently of Studio.',
+    studio: 'Studio',
+    studioDetail: 'Author, simulate, test and approve releases.',
+    runtime: 'Runtime',
+    runtimeDetail: 'Verify release artifacts and answer decisions over REST.',
+    channels: 'Your systems',
+    channelsDetail: 'Core banking, applications and customer channels.',
+    releaseFlow: 'Studio → Runtime: signed release artifacts',
+    requestFlow: 'Your systems → Runtime: input; Runtime → your systems: decision',
+    recordFlow: 'Runtime → Studio: decision records for search, replay and explanation',
+    connectorFlow: 'Runtime → allowed external systems: connector requests',
+    related: 'Connected tools and references',
+    docs: 'Documentation and API reference',
+    docsDetail: 'Guides and API contracts. Release references and the installed API explorer are planned.',
+    cli: 'donka CLI and MCP bridge',
+    cliDetail:
+      'Pull releases and input contracts from Studio. The local MCP bridge is separate; Studio integration is planned.',
+    fieldkit: 'Fieldkit',
+    fieldkitDetail: 'Planned for Phase 2: forms connected to the same input contracts.',
+    roadmap: 'Phase 2 · planned',
+    versionNote:
+      'This preview describes development work. A version selector and downloadable PDF will accompany the release documentation.',
+    nextTitle: 'Start with the essentials',
+    overviewDetail: 'What each product does and who uses it.',
+    architectureDetail: 'The data flows, responsibilities and boundaries.',
+    diagramCaption: 'Studio controls releases. The Runtime keeps serving loaded releases when Studio is unavailable.',
+  },
+  fr: {
+    documentation: 'Documentation',
+    development: 'Version de développement',
+    title: 'Comprendre comment Donka s’assemble.',
+    lead: 'Écrivez les règles métier dans Studio, servez les décisions avec le Runtime et conservez les preuves nécessaires à leur examen.',
+    read: 'Découvrir Donka',
+    architecture: 'Explorer l’architecture',
+    diagramTitle: 'Les connexions de Donka',
+    diagramIntro: 'Le Runtime sert vos systèmes indépendamment de Studio.',
+    studio: 'Studio',
+    studioDetail: 'Écrire, simuler, tester et approuver les publications.',
+    runtime: 'Runtime',
+    runtimeDetail: 'Vérifier les artefacts et répondre aux décisions via REST.',
+    channels: 'Vos systèmes',
+    channelsDetail: 'Système bancaire, applications et canaux clients.',
+    releaseFlow: 'Studio → Runtime : artefacts de publication signés',
+    requestFlow: 'Vos systèmes → Runtime : données ; Runtime → vos systèmes : décision',
+    recordFlow: 'Runtime → Studio : enregistrements pour la recherche, le rejeu et l’explication',
+    connectorFlow: 'Runtime → systèmes externes autorisés : appels de connecteurs',
+    related: 'Outils et références associés',
+    docs: 'Documentation et référence API',
+    docsDetail: 'Guides et contrats API. Les références des publications et l’explorateur API installé sont prévus.',
+    cli: 'CLI donka et pont MCP',
+    cliDetail:
+      'Récupérer les publications et contrats d’entrée de Studio. Le pont MCP local est distinct ; son intégration à Studio est prévue.',
+    fieldkit: 'Fieldkit',
+    fieldkitDetail: 'Prévu en Phase 2 : des formulaires reliés aux mêmes contrats d’entrée.',
+    roadmap: 'Phase 2 · prévu',
+    versionNote:
+      'Cet aperçu décrit le travail en développement. Un sélecteur de version et un PDF téléchargeable accompagneront la documentation des publications.',
+    nextTitle: 'Commencer par l’essentiel',
+    overviewDetail: 'Le rôle de chaque produit et de ses utilisateurs.',
+    architectureDetail: 'Les flux, les responsabilités et les frontières.',
+    diagramCaption:
+      'Studio contrôle les publications. Le Runtime continue de servir les publications chargées si Studio est indisponible.',
+  },
+} as const;
+
+export type Locale = keyof typeof messages;
+
+export function isLocale(value: string): value is Locale {
+  return Object.hasOwn(messages, value);
+}

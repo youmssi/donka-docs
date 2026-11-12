@@ -1,0 +1,41 @@
+---
+title: Architecture
+description: The product boundaries and the data that crosses them.
+---
+
+<ArchitectureDiagram locale="en" />
+
+## Studio controls releases
+
+People author and simulate decisions in Studio, save versions and assemble
+immutable releases. Production requires approval by another owner. Studio publishes
+signed release artifacts to storage; the Runtime reads and verifies them.
+A CLI token allows read-only access to released artifacts and input contracts.
+
+## Runtime serves decisions
+
+Customer systems send JSON input to the Runtime and receive the decision's JSON
+output. Connectors call external services only on hosts allowed by the installation.
+Connector credentials are configured by the operator, rather than stored in graphs.
+
+Once a release is loaded, the Runtime does not need Studio for each evaluation.
+It sends decision records asynchronously to Studio. Its buffer is bounded:
+availability does not imply unlimited storage during an outage.
+
+## Records return to Studio
+
+Studio stores decision records for search and replay. Optional explanations use
+the customer's configured language-model endpoint with redaction. They do not
+change the graph or the decision that was served.
+
+## Tools and references
+
+The CLI pulls releases and input contracts for CI/CD. Its local MCP bridge also
+exists; connecting it to the Studio editor remains planned.
+This documentation is a separate static site. The installed-version interactive
+API reference belongs to the next part of this documentation work.
+
+Fieldkit belongs to Phase 2 and is shown as planned in the diagram.
+It is not a requirement for operating Studio, Runtime or the CLI.
+
+Return to [Discover Donka](../).

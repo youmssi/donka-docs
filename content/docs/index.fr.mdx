@@ -1,0 +1,37 @@
+---
+title: Découvrir Donka
+description: Des règles métier à écrire, tester, publier et examiner.
+---
+
+Donka est une plateforme de gestion des décisions auto-hébergée. Les équipes
+écrivent leurs règles métier sous forme de graphes, les simulent avec des exemples,
+enregistrent des versions et publient des releases. Les applications clientes
+appellent un Runtime distinct pour évaluer ces règles.
+
+Le premier pilote vise une banque ou un établissement de microfinance, mais la
+plateforme reste indépendante du secteur. Le scoring crédit, les contrôles KYC
+et les limites de transaction sont des exemples de décisions.
+
+## Qui l’utilise
+
+- **Les équipes métier** possèdent les règles et testent les effets d’un changement.
+- **Les relecteurs** approuvent les publications en production. L’auteur ne peut pas approuver sa propre publication.
+- **Les exploitants** installent les produits, gèrent les clés et sauvegardes et surveillent les services.
+- **Les développeurs** appellent le Runtime ou récupèrent les artefacts et contrats d’entrée avec le CLI.
+
+## Trois produits
+
+**Studio** conserve les projets, brouillons modifiables, versions enregistrées,
+scénarios, publications, permissions et enregistrements de décision. Un déploiement
+en production exige une approbation ; la préproduction permet de tester une
+publication avant cette approbation.
+
+**Le Runtime** charge les artefacts publiés et répond via REST. Il continue de
+servir une publication chargée si Studio est indisponible. Les enregistrements
+attendent dans une mémoire tampon bornée jusqu’à ce que Studio puisse les recevoir.
+
+**Le CLI donka** récupère les artefacts publiés et contrats d’entrée de Studio
+pour les pipelines de livraison. Il vérifie les téléchargements et aide à maintenir
+les formulaires en accord avec leurs contrats d’entrée.
+
+Lisez [Architecture](./architecture/) pour les connexions et les frontières de confiance.
