@@ -16,10 +16,19 @@ export default async function PrintPage({ params }: PageProps<'/[lang]/print'>) 
       </header>
       {pages.map((page) => {
         const MDX = page.data.body;
+        const components = getMDXComponents({
+          a: ({ href, ...props }) => {
+            if (!href || /^(?:[a-z][a-z0-9+.-]*:|\/|#)/i.test(href)) {
+              return <a href={href} {...props} />;
+            }
+            const target = new URL(href, new URL(page.url, 'https://docs.invalid'));
+            return <a href={`${target.pathname}${target.search}${target.hash}`} {...props} />;
+          },
+        });
         return (
           <article key={page.url}>
             <h1>{page.data.title}</h1>
-            <MDX components={getMDXComponents()} />
+            <MDX components={components} />
           </article>
         );
       })}

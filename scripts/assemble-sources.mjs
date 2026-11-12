@@ -228,13 +228,17 @@ const generatedReferences = {
   'cli.fr.mdx': `---\ntitle: CLI Donka\n---\n\nSortie générée directement à partir de \`donka --help\` pour la révision CLI exacte du manifest. Les commandes sont affichées dans leur langue d'origine.\n\n${cliHelp.map((item) => `### \`${item.command}\`\n\n\`\`\`text\n${item.output}\n\`\`\``).join('\n\n')}\n`,
 };
 const artifactSourceLink = `${manifest.repositories.studio.url}/blob/${manifest.repositories.studio.ref}/docs/rules-sync.md`;
-const artifactFormatBody = stripFrontmatter(artifactFormatSource).replace(/^# .+\r?\n+/, '');
+const artifactFormatBody = rewriteLinks(
+  stripFrontmatter(artifactFormatSource).replace(/^# .+\r?\n+/, ''),
+  manifest.repositories.studio,
+  'docs/rules-sync.md',
+);
 generatedReferences['artifact-format.mdx'] =
   `---\ntitle: Artifact format and rules sync\n---\n\n> Source: [Studio docs/rules-sync.md](${artifactSourceLink}) (${manifest.repositories.studio.tag ? `tag ${manifest.repositories.studio.tag}` : `commit ${manifest.repositories.studio.commit.slice(0, 12)}`})\n\n${artifactFormatBody}\n`;
 generatedReferences['artifact-format.fr.mdx'] =
   `---\ntitle: Format des artefacts et synchronisation\n---\n\n> Source en anglais : [Studio docs/rules-sync.md](${artifactSourceLink})\n\n${artifactFormatBody}\n`;
-const studioConfigurationPage = `---\ntitle: Configuration variables\n---\n\nGenerated from the exact Studio environment template pinned in the release manifest. Runtime settings are listed in the [Runtime configuration guide](/en/docs/evidence/runtime/configuration/). CLI options and environment inputs appear in the [generated command reference](cli).\n\n| Variable |\n| --- |\n${studioVariables.map((name) => `| \`${name}\` |`).join('\n')}\n\n[Studio environment template](/evidence/studio-configuration.env)\n`;
-const studioConfigurationPageFr = `---\ntitle: Variables de configuration\n---\n\nGénéré depuis le modèle d'environnement Studio épinglé dans le manifest. Les paramètres Runtime figurent dans le [guide de configuration Runtime](/fr/docs/evidence/runtime/configuration/). Les options CLI figurent dans la [référence des commandes générée](cli).\n\n| Variable |\n| --- |\n${studioVariables.map((name) => `| \`${name}\` |`).join('\n')}\n\n[Modèle d'environnement Studio](/evidence/studio-configuration.env)\n`;
+const studioConfigurationPage = `---\ntitle: Configuration variables\n---\n\nGenerated from the exact Studio environment template pinned in the release manifest. Runtime settings are listed in the [Runtime configuration guide](/en/docs/evidence/runtime/configuration/). CLI options and environment inputs appear in the [generated command reference](/en/docs/reference/cli/).\n\n| Variable |\n| --- |\n${studioVariables.map((name) => `| \`${name}\` |`).join('\n')}\n\n[Studio environment template](/evidence/studio-configuration.env)\n`;
+const studioConfigurationPageFr = `---\ntitle: Variables de configuration\n---\n\nGénéré depuis le modèle d'environnement Studio épinglé dans le manifest. Les paramètres Runtime figurent dans le [guide de configuration Runtime](/fr/docs/evidence/runtime/configuration/). Les options CLI figurent dans la [référence des commandes générée](/fr/docs/reference/cli/).\n\n| Variable |\n| --- |\n${studioVariables.map((name) => `| \`${name}\` |`).join('\n')}\n\n[Modèle d'environnement Studio](/evidence/studio-configuration.env)\n`;
 Object.assign(generatedReferences, {
   'index.mdx': `${generatedReferences['index.mdx']}\n- [Configuration variables](configuration)\n- [Artifact format](artifact-format)\n- [Release notes](release-notes)\n`,
   'index.fr.mdx': `${generatedReferences['index.fr.mdx']}\n- [Variables de configuration](configuration)\n- [Format des artefacts](artifact-format)\n- [Notes de version](release-notes)\n`,
