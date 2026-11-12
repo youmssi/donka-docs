@@ -229,8 +229,10 @@ const generatedReferences = {
 };
 const artifactSourceLink = `${manifest.repositories.studio.url}/blob/${manifest.repositories.studio.ref}/docs/rules-sync.md`;
 const artifactFormatBody = stripFrontmatter(artifactFormatSource).replace(/^# .+\r?\n+/, '');
-generatedReferences['artifact-format.mdx'] = `---\ntitle: Artifact format and rules sync\n---\n\n> Source: [Studio docs/rules-sync.md](${artifactSourceLink}) (${manifest.repositories.studio.tag ? `tag ${manifest.repositories.studio.tag}` : `commit ${manifest.repositories.studio.commit.slice(0, 12)}`})\n\n${artifactFormatBody}\n`;
-generatedReferences['artifact-format.fr.mdx'] = `---\ntitle: Format des artefacts et synchronisation\n---\n\n> Source en anglais : [Studio docs/rules-sync.md](${artifactSourceLink})\n\n${artifactFormatBody}\n`;
+generatedReferences['artifact-format.mdx'] =
+  `---\ntitle: Artifact format and rules sync\n---\n\n> Source: [Studio docs/rules-sync.md](${artifactSourceLink}) (${manifest.repositories.studio.tag ? `tag ${manifest.repositories.studio.tag}` : `commit ${manifest.repositories.studio.commit.slice(0, 12)}`})\n\n${artifactFormatBody}\n`;
+generatedReferences['artifact-format.fr.mdx'] =
+  `---\ntitle: Format des artefacts et synchronisation\n---\n\n> Source en anglais : [Studio docs/rules-sync.md](${artifactSourceLink})\n\n${artifactFormatBody}\n`;
 const studioConfigurationPage = `---\ntitle: Configuration variables\n---\n\nGenerated from the exact Studio environment template pinned in the release manifest. Runtime settings are listed in the [Runtime configuration guide](/en/docs/evidence/runtime/configuration/). CLI options and environment inputs appear in the [generated command reference](cli).\n\n| Variable |\n| --- |\n${studioVariables.map((name) => `| \`${name}\` |`).join('\n')}\n\n[Studio environment template](/evidence/studio-configuration.env)\n`;
 const studioConfigurationPageFr = `---\ntitle: Variables de configuration\n---\n\nGénéré depuis le modèle d'environnement Studio épinglé dans le manifest. Les paramètres Runtime figurent dans le [guide de configuration Runtime](/fr/docs/evidence/runtime/configuration/). Les options CLI figurent dans la [référence des commandes générée](cli).\n\n| Variable |\n| --- |\n${studioVariables.map((name) => `| \`${name}\` |`).join('\n')}\n\n[Modèle d'environnement Studio](/evidence/studio-configuration.env)\n`;
 Object.assign(generatedReferences, {
@@ -238,8 +240,22 @@ Object.assign(generatedReferences, {
   'index.fr.mdx': `${generatedReferences['index.fr.mdx']}\n- [Variables de configuration](configuration)\n- [Format des artefacts](artifact-format)\n- [Notes de version](release-notes)\n`,
   'configuration.mdx': studioConfigurationPage,
   'configuration.fr.mdx': studioConfigurationPageFr,
-  'release-notes.mdx': `---\ntitle: Release notes\n---\n\nDonka products release independently. Published versions link to their product release pages. This current development snapshot uses pinned commits.\n\n${Object.entries(manifest.repositories).map(([key, repository]) => `- [${key} ${repository.tag ?? 'Development'}](${repository.tag ? `${repository.url}/releases/tag/${repository.tag}` : `${repository.url}/releases`})`).join('\n')}\n`,
-  'release-notes.fr.mdx': `---\ntitle: Notes de version\n---\n\nLes produits Donka sont publiés indépendamment. Les versions publiées renvoient vers les pages de publication de chaque produit. Cet instantané de développement utilise des commits épinglés.\n\n${Object.entries(manifest.repositories).map(([key, repository]) => `- [${key} ${repository.tag ?? 'Développement'}](${repository.tag ? `${repository.url}/releases/tag/${repository.tag}` : `${repository.url}/releases`})`).join('\n')}\n`,
+  'release-notes.mdx': `---\ntitle: Release notes\n---\n\nDonka products release independently. Published versions link to their product release pages. This current development snapshot uses pinned commits.\n\n${Object.entries(
+    manifest.repositories,
+  )
+    .map(
+      ([key, repository]) =>
+        `- [${key} ${repository.tag ?? 'Development'}](${repository.tag ? `${repository.url}/releases/tag/${repository.tag}` : `${repository.url}/releases`})`,
+    )
+    .join('\n')}\n`,
+  'release-notes.fr.mdx': `---\ntitle: Notes de version\n---\n\nLes produits Donka sont publiés indépendamment. Les versions publiées renvoient vers les pages de publication de chaque produit. Cet instantané de développement utilise des commits épinglés.\n\n${Object.entries(
+    manifest.repositories,
+  )
+    .map(
+      ([key, repository]) =>
+        `- [${key} ${repository.tag ?? 'Développement'}](${repository.tag ? `${repository.url}/releases/tag/${repository.tag}` : `${repository.url}/releases`})`,
+    )
+    .join('\n')}\n`,
 });
 await rm(referenceRoot, { recursive: true, force: true });
 await rm(referenceArtifactRoot, { recursive: true, force: true });
