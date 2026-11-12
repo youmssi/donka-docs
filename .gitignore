@@ -4,6 +4,9 @@
 
 # generated content
 .source
+/.sources/
+/content/docs/evidence/
+/public/evidence/
 
 # test & build
 /coverage

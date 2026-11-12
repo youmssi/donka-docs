@@ -1,0 +1,19 @@
+---
+title: Intégrer Donka
+description: Relier les applications, publications, contrats d’entrée et enregistrements de décision.
+---
+
+Les applications envoient leurs demandes de décision au Runtime. Studio écrit et publie les règles ; le Runtime évalue une publication chargée indépendamment de Studio. Lorsque Studio est disponible, le Runtime lui transmet les enregistrements de décision pour la recherche, le rejeu et l’explication.
+
+## Parcours d’intégration
+
+- Consultez l’[API de décision](../evidence/runtime/rules-openapi/) et les [contrats d’entrée](../evidence/runtime/contracts/).
+- Utilisez la [synchronisation des publications avec le CLI](../evidence/cli/pull/) pour récupérer un artefact publié et vérifier son empreinte.
+- Utilisez la [validation de formulaires du CLI](../evidence/cli/form/) pour vérifier les formulaires par rapport à un contrat d’entrée.
+- Configurez les [connecteurs](../evidence/runtime/connectors/) uniquement pour les appels externes nécessaires à vos règles.
+
+Le parcours de récupération du CLI est en lecture seule pour les publications Studio. Le pont MCP local est documenté séparément ; son intégration dans Studio est prévue, mais n’est pas disponible. Fieldkit et la rédaction assistée par IA à partir de documents relèvent de la Phase 2.
+
+## Tester les limites
+
+Utilisez une publication de préproduction et des entrées représentatives. Vérifiez les comportements d’échec et la livraison des enregistrements avec les responsables des deux services. Consultez la [configuration du Runtime](../evidence/runtime/configuration/) pour les paramètres des points de terminaison et de la file d’attente.

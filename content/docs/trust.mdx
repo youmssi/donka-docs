@@ -1,0 +1,21 @@
+﻿---
+title: Trust and security
+description: Read the security evidence with its current scope and status.
+---
+
+Donka is self-hosted: the installation and its decision data run on infrastructure the customer operates. The linked dossier is built from pinned Studio source files; open each source commit to inspect the full evidence.
+
+## What the evidence says
+
+- The [OWASP ASVS 4.0.3 level 2 assessment](../evidence/security/asvs/) is a self-assessment. It has not been independently verified.
+- The [NIST SSDF assessment](../evidence/security/ssdf/) is a self-assessment against SP 800-218 version 1.1.
+- The [accessibility assessment](../evidence/security/wcag/) is partial. It is not a WCAG conformance certification.
+- The [supply-chain evidence](../evidence/security/supply-chain/) says SLSA provenance is prepared and awaits the first signed release. Do not treat that as a published signed-image claim.
+- The [PCI DSS scope statement](../evidence/security/pci-dss-scope/) is a self-declared scope. It does not certify the product or detect every possible card number in arbitrary runtime input; keep payment card data out of Donka inputs.
+- The [penetration-test scope](../evidence/security/penetration-test-scope/) describes a proposed assessment scope; it is not evidence that an external test has taken place.
+
+## Operations and reporting
+
+The [security questionnaire](../evidence/security/questionnaire/) links answers to detailed evidence. The [threat model](../evidence/security/threat-model/) and [compliance mappings](../evidence/security/compliance/) preserve their source status and exceptions.
+
+The [installation guide](../evidence/installation/) includes backup and recovery operations. DNK-50 rehearsed a demo-data restore in 24 seconds with zero records lost against the stated one-hour recovery-time and 24-hour recovery-point objectives. That result is not a customer-sized recovery proof. Customer policy values and the pilot target still require owner decisions.

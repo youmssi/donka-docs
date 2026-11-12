@@ -1,4 +1,4 @@
 {
   "title": "Documentation Donka",
-  "pages": ["index", "architecture"]
+  "pages": ["index", "architecture", "getting-started", "integrate", "trust", "performance", "evidence"]
 }

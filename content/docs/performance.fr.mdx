@@ -1,0 +1,16 @@
+---
+title: Performances
+description: Comprendre les charges mesurées, les objectifs et les limites des preuves actuelles.
+---
+
+Le Runtime sert les décisions tandis que Studio les enregistre de façon asynchrone. La CI mesure la latence des requêtes, le débit, le délai du flux et la recherche/relecture Studio à partir des charges documentées.
+
+## Preuves actuelles
+
+Le guide source décrit la méthode, les objectifs, les résultats et les règles de régression : [rapport de performance](../evidence/operations/performance/). La [base de référence lisible par machine](/evidence/performance-baseline.json) est générée depuis le même commit Studio épinglé et contient les profils par processeur. Une mesure sur un runner GitHub ne garantit pas la capacité sur le matériel d’un client.
+
+L’échantillon de recherche/relecture Studio contient 100 000 enregistrements sur 60 mois. Il ne prouve pas une capacité de 180 millions d’enregistrements sur cinq ans. Exécutez le test de charge documenté sur le matériel prévu avant de fixer une capacité client.
+
+## Mesurer votre environnement
+
+Utilisez un serveur de test dédié et les commandes du rapport source. Faites correspondre le modèle de processeur, le nombre de cœurs et l’architecture avant de comparer le débit du Runtime. La CI de performance détecte les régressions par rapport à ces bases ; elle ne constitue pas un accord de niveau de service.

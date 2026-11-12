@@ -15,8 +15,34 @@ jobs:
   site:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      DONKA_DOCS_SOURCES_DIR: ${{ github.workspace }}/.sources
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Read pinned product source refs
+        id: source_refs
+        run: node scripts/source-refs.mjs
+      - name: Checkout Studio source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: youmssi/donka
+          ref: ${{ steps.source_refs.outputs.studio }}
+          path: .sources/studio
+          persist-credentials: false
+      - name: Checkout Runtime source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: youmssi/donka-runtime
+          ref: ${{ steps.source_refs.outputs.runtime }}
+          path: .sources/donka-runtime
+          persist-credentials: false
+      - name: Checkout CLI source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: youmssi/donka-cli
+          ref: ${{ steps.source_refs.outputs.cli }}
+          path: .sources/donka-cli
+          persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
@@ -31,6 +57,8 @@ jobs:
       - run: pnpm test
       - run: pnpm audit:security
       - run: pnpm build
+        env:
+          DONKA_DOCS_SOURCES_DIR: ${{ github.workspace }}/.sources
       - run: pnpm check:links
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
