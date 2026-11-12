@@ -182,7 +182,7 @@ test('review trust evidence and the pinned performance baseline', async ({ page 
   if (locale === 'fr') await expect(page.getByText(/English source/)).toBeVisible();
   await expect(page.getByRole('link', { name: /studio\/docs\/security\/asvs\.md/ })).toHaveAttribute(
     'href',
-    /^https:\/\/github\.com\/youmssi\/donka\/blob\/e1841d3/,
+    /^https:\/\/github\.com\/youmssi\/donka\/blob\/f9a19fd/,
   );
   await fitsViewport(page);
 
@@ -223,7 +223,7 @@ test('review references generated from the curated source set', async ({ page },
     page.getByRole('heading', { level: 1, name: locale === 'fr' ? 'API Studio' : 'Studio API' }),
   ).toBeVisible();
   await expect(page.getByText('/health', { exact: true })).toBeVisible();
-  await expect(page.getByRole('link', { name: /studio-openapi\.json/ })).toHaveAttribute(
+  await expect(page.getByRole('link', { name: /OpenAPI contract|contrat OpenAPI/i })).toHaveAttribute(
     'href',
     '/reference/studio-openapi.json',
   );
