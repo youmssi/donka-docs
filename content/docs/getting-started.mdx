@@ -1,0 +1,18 @@
+---
+title: Get started
+description: Choose the right environment and follow the supported installation path.
+---
+
+Donka runs on infrastructure you operate. Begin with a test or staging installation, verify the inputs and decisions with your team, and plan production approval separately.
+
+## Installation paths
+
+- [Install Studio and Runtime](../evidence/installation/) for prerequisites, configuration and operational steps.
+- [Runtime configuration](../evidence/runtime/configuration/) for environment settings and secret files.
+- [Runtime contracts](../evidence/runtime/contracts/) for the decision request shape.
+
+`donka-admin init` prepares an installation; it does not start the services or approve a production deployment. The image-based installation steps describe the supported workflow. The separate five-minute fresh-install check against published images remains open, so this preview does not claim that gate has passed.
+
+## Before production
+
+Agree on the host, domain, backup destination, secret handling and approval roles with the customer owner. Test a release in staging. A production release still requires the normal approval flow. The restore rehearsal evidence is summarized on [Trust and security](../trust/).

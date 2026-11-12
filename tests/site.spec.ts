@@ -144,3 +144,57 @@ test('language, theme and mobile navigation controls preserve the reading contex
   await fitsViewport(page);
   expect(errors).toEqual([]);
 });
+
+test('review trust evidence and the pinned performance baseline', async ({ page }, testInfo) => {
+  const { locale } = testInfo.project.metadata as {
+    locale: 'en' | 'fr';
+  };
+  const trustTitle = locale === 'fr' ? 'Confiance et sécurité' : 'Trust and security';
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+
+  await page.goto(`/${locale}/docs/trust/`);
+  const sourceManifestResponse = await page.request.get(
+    new URL('/evidence/source-manifest.json', page.url()).toString(),
+  );
+  expect(sourceManifestResponse.ok()).toBe(true);
+  const sourceManifest = await sourceManifestResponse.json();
+  expect(sourceManifest.repositories.studio.ref).toBe('928fd00f479c27eead3f184b54fd5f853f54ae2c');
+  expect(sourceManifest.documents.length).toBeGreaterThan(0);
+  await expect(page.getByRole('heading', { level: 1, name: trustTitle })).toBeVisible();
+  await expect(page.getByText(/self-assessment|autoévaluation/i).first()).toBeVisible();
+  await fitsViewport(page);
+  await page.screenshot({ path: testInfo.outputPath('trust.png'), fullPage: true });
+  await testInfo.attach('Trust', { path: testInfo.outputPath('trust.png'), contentType: 'image/png' });
+
+  await page.getByRole('link', { name: /OWASP ASVS|évaluation OWASP ASVS/i }).click();
+  await expect(page).toHaveURL(new RegExp(`/${locale}/docs/evidence/security/asvs/$`));
+  await expect(page.getByRole('heading', { level: 1, name: /OWASP ASVS/ })).toBeVisible();
+  if (locale === 'fr') await expect(page.getByText(/English source/)).toBeVisible();
+  await expect(page.getByRole('link', { name: /studio\/docs\/security\/asvs\.md/ })).toHaveAttribute(
+    'href',
+    /^https:\/\/github\.com\/youmssi\/donka\/blob\/928fd00f/,
+  );
+  await fitsViewport(page);
+
+  await page.goto(`/${locale}/docs/performance/`);
+  await expect(
+    page.getByRole('heading', { level: 1, name: locale === 'fr' ? 'Performances' : 'Performance' }),
+  ).toBeVisible();
+  const baselineResponse = await page.request.get(
+    new URL('/evidence/performance-baseline.json', page.url()).toString(),
+  );
+  expect(baselineResponse.ok()).toBe(true);
+  const baseline = await baselineResponse.json();
+  expect(baseline.targets.runtime).toMatchObject({ rate: 100, p95_ms: 20, p99_ms: 50 });
+  expect(baseline.baseline.runtime.profiles.length).toBeGreaterThan(0);
+  const performanceReport = page.getByRole('link', { name: /performance test report|rapport de performance/i });
+  await expect(performanceReport).toBeVisible();
+  await performanceReport.click();
+  await expect(page).toHaveURL(new RegExp(`/${locale}/docs/evidence/operations/performance/$`));
+  await expect(page.getByRole('heading', { level: 1, name: /Performance|Performances/ })).toBeVisible();
+  await fitsViewport(page);
+  await page.screenshot({ path: testInfo.outputPath('performance.png'), fullPage: true });
+  await testInfo.attach('Performance', { path: testInfo.outputPath('performance.png'), contentType: 'image/png' });
+  expect(errors).toEqual([]);
+});

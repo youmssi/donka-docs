@@ -1,0 +1,16 @@
+﻿---
+title: Performance
+description: Understand the measured workloads, targets and limits of the current evidence.
+---
+
+The Runtime serves decisions while Studio records them asynchronously. CI measures request latency, throughput, feed delay and Studio search/replay using the documented sample workloads.
+
+## Current evidence
+
+The source guide contains the workload method, targets, results and regression rules: [performance test report](../evidence/operations/performance/). The [machine-readable baseline](/evidence/performance-baseline.json) is generated from the same pinned Studio commit and records per-CPU profiles. A GitHub runner measurement is not a capacity guarantee for customer hardware.
+
+The Studio search/replay sample contains 100,000 records across 60 months. It is not proof of 180 million records over five years. Run the documented load test on the intended hardware before setting a customer capacity target.
+
+## Measure your environment
+
+Use a dedicated test server and the commands in the source report. Match the CPU model, core count and architecture when comparing Runtime throughput. The performance CI is a regression guard against those baselines; it is not a service-level agreement.

@@ -1,0 +1,68 @@
+{
+  "repositories": {
+    "studio": {
+      "directory": "studio",
+      "url": "https://github.com/youmssi/donka",
+      "ref": "928fd00f479c27eead3f184b54fd5f853f54ae2c",
+      "artifacts": [{ "path": "docs/performance.json", "output": "performance-baseline.json" }],
+      "files": [
+        {
+          "path": "docs/install.md",
+          "slug": "installation",
+          "title": "Installation",
+          "titleFr": "Installation",
+          "translatedPath": "docs/install.fr.md"
+        },
+        {
+          "path": "docs/performance.md",
+          "slug": "operations/performance",
+          "title": "Performance",
+          "titleFr": "Performances",
+          "translatedPath": "docs/performance.fr.md"
+        },
+        {
+          "path": "docs/security/questionnaire.md",
+          "slug": "security/questionnaire",
+          "title": "Security questionnaire",
+          "titleFr": "Questionnaire de sécurité",
+          "translatedPath": "docs/security/questionnaire.fr.md"
+        },
+        { "path": "docs/security/asvs.md", "slug": "security/asvs", "title": "OWASP ASVS self-assessment" },
+        { "path": "docs/security/compliance.md", "slug": "security/compliance", "title": "Compliance mappings" },
+        { "path": "docs/security/threat-model.md", "slug": "security/threat-model", "title": "Threat model" },
+        { "path": "docs/security/ssdf.md", "slug": "security/ssdf", "title": "NIST SSDF self-assessment" },
+        { "path": "docs/security/supply-chain.md", "slug": "security/supply-chain", "title": "Software supply chain" },
+        { "path": "docs/security/wcag.md", "slug": "security/wcag", "title": "Accessibility assessment" },
+        { "path": "docs/security/pci-dss-scope.md", "slug": "security/pci-dss-scope", "title": "PCI DSS scope" },
+        {
+          "path": "docs/security/penetration-test-scope.md",
+          "slug": "security/penetration-test-scope",
+          "title": "Penetration test scope"
+        }
+      ]
+    },
+    "runtime": {
+      "directory": "donka-runtime",
+      "url": "https://github.com/youmssi/donka-runtime",
+      "ref": "373f7a721f83d978404d005e98de47c52ec97abc",
+      "files": [
+        { "path": "docs/configuration.md", "slug": "runtime/configuration", "title": "Runtime configuration" },
+        { "path": "docs/connectors.md", "slug": "runtime/connectors", "title": "Connectors" },
+        { "path": "docs/contracts.md", "slug": "runtime/contracts", "title": "Contracts" },
+        { "path": "docs/decision-log.md", "slug": "runtime/decision-log", "title": "Decision log" },
+        { "path": "docs/rules-openapi.md", "slug": "runtime/rules-openapi", "title": "Rules API" }
+      ]
+    },
+    "cli": {
+      "directory": "donka-cli",
+      "url": "https://github.com/youmssi/donka-cli",
+      "ref": "fb733f19668ea835c3fd456088d1950af97d7de7",
+      "files": [
+        { "path": "docs/pull.md", "slug": "cli/pull", "title": "CLI release sync" },
+        { "path": "docs/form.md", "slug": "cli/form", "title": "CLI form validation" },
+        { "path": "docs/ci-templates.md", "slug": "cli/ci-templates", "title": "CI templates" },
+        { "path": "docs/mcp.md", "slug": "cli/mcp", "title": "MCP bridge" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+---
+title: Confiance et sécurité
+description: Consulter les preuves de sécurité avec leur portée et leur statut actuels.
+---
+
+Donka est auto-hébergé : l’installation et ses données de décision s’exécutent sur l’infrastructure exploitée par le client. Le dossier lié est assemblé à partir de fichiers Studio épinglés ; ouvrez chaque commit source pour examiner les preuves complètes.
+
+## Ce que montrent les preuves
+
+- L’[évaluation OWASP ASVS 4.0.3 niveau 2](../evidence/security/asvs/) est une autoévaluation. Elle n’a pas été vérifiée indépendamment.
+- L’[évaluation NIST SSDF](../evidence/security/ssdf/) est une autoévaluation selon SP 800-218 version 1.1.
+- L’[évaluation d’accessibilité](../evidence/security/wcag/) est partielle. Ce n’est pas une certification de conformité WCAG.
+- Les [preuves de chaîne d’approvisionnement](../evidence/security/supply-chain/) indiquent que la provenance SLSA est préparée et attend la première publication signée. Cela ne permet pas d’affirmer que des images signées sont publiées.
+- La [déclaration de portée PCI DSS](../evidence/security/pci-dss-scope/) est une portée autodéclarée. Elle ne certifie pas le produit et ne détecte pas tous les numéros de carte possibles dans des entrées arbitraires du Runtime ; n’intégrez pas de données de carte bancaire aux entrées Donka.
+- Le [périmètre de test d’intrusion](../evidence/security/penetration-test-scope/) décrit le périmètre proposé ; il ne prouve pas qu’un test externe a eu lieu.
+
+## Exploitation et signalement
+
+Le [questionnaire de sécurité](../evidence/security/questionnaire/) relie les réponses aux preuves détaillées. Le [modèle de menace](../evidence/security/threat-model/) et les [correspondances réglementaires](../evidence/security/compliance/) conservent le statut et les exceptions de leurs sources.
+
+Le [guide d’installation](../evidence/installation/) décrit les opérations de sauvegarde et de restauration. La répétition DNK-50 a restauré des données de démonstration en 24 secondes sans perte, selon les objectifs déclarés d’une heure pour le délai de reprise et de 24 heures pour le point de reprise. Ce résultat ne prouve pas une restauration à l’échelle d’un client. Les valeurs de politique client et la cible du pilote restent à décider par le propriétaire.

@@ -1,0 +1,18 @@
+---
+title: Bien démarrer
+description: Choisir le bon environnement et suivre le parcours d’installation pris en charge.
+---
+
+Donka fonctionne sur l’infrastructure que vous exploitez. Commencez par une installation de test ou de préproduction, vérifiez les entrées et les décisions avec votre équipe, puis planifiez séparément l’approbation de production.
+
+## Parcours d’installation
+
+- [Installer Studio et Runtime](../evidence/installation/) pour les prérequis, la configuration et les opérations.
+- [Configurer le Runtime](../evidence/runtime/configuration/) pour les paramètres et les fichiers de secrets.
+- [Contrats du Runtime](../evidence/runtime/contracts/) pour la forme des requêtes de décision.
+
+`donka-admin init` prépare une installation ; il ne démarre pas les services et n’approuve pas un déploiement en production. Les étapes d’installation par images décrivent le parcours pris en charge. Le contrôle distinct d’installation en moins de cinq minutes depuis les images publiées reste ouvert ; cet aperçu ne prétend pas qu’il est réussi.
+
+## Avant la production
+
+Convenez avec le propriétaire client de l’hôte, du domaine, de la destination des sauvegardes, de la gestion des secrets et des rôles d’approbation. Testez une publication en préproduction. Une publication en production exige toujours le parcours d’approbation habituel. Le résultat de la répétition de restauration est résumé dans [Confiance et sécurité](../trust/).

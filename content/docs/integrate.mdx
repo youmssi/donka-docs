@@ -1,0 +1,19 @@
+﻿---
+title: Integrate Donka
+description: Connect applications, releases, input contracts and decision records.
+---
+
+Applications send decision requests to the Runtime. Studio authors and publishes the rules; the Runtime evaluates a loaded release independently of Studio. It sends decision records to Studio for search, replay and explanation when Studio is available.
+
+## Integration paths
+
+- Read the [decision API](../evidence/runtime/rules-openapi/) and [input contracts](../evidence/runtime/contracts/).
+- Use the [CLI release sync](../evidence/cli/pull/) to retrieve a published artifact and verify its digest.
+- Use [CLI form validation](../evidence/cli/form/) to check forms against an input contract.
+- Configure [connectors](../evidence/runtime/connectors/) only for the external calls your rules require.
+
+The CLI pull path is read-only with respect to Studio releases. The local MCP bridge is documented separately; integration of that bridge into Studio is planned, not available. Fieldkit and document-assisted AI authoring are Phase 2 work.
+
+## Test the boundary
+
+Use a staging release and representative inputs. Confirm failure behavior and decision-record delivery with the operators who own both services. See [Runtime configuration](../evidence/runtime/configuration/) for endpoint and queue settings.
