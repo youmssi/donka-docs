@@ -168,7 +168,7 @@ test('review trust evidence and the pinned performance baseline', async ({ page 
   );
   expect(sourceManifestResponse.ok()).toBe(true);
   const sourceManifest = await sourceManifestResponse.json();
-  expect(sourceManifest.repositories.studio.ref).toBe('4045434');
+  expect(sourceManifest.repositories.studio.ref).toBe('404543441b19aa56a1d00210c190b1c06d2d0ffa');
   expect(sourceManifest.documents.length).toBeGreaterThan(0);
   await expect(page.getByRole('heading', { level: 1, name: trustTitle })).toBeVisible();
   await expect(page.getByText(/self-assessment|autoévaluation/i).first()).toBeVisible();
@@ -214,7 +214,7 @@ test('review references generated from the curated source set', async ({ page },
   expect(manifestResponse.ok()).toBe(true);
   const manifest = await manifestResponse.json();
   expect(manifest.version.id).toBe('development');
-  expect(manifest.repositories.studio.commit).toBe('4045434');
+  expect(manifest.repositories.studio.commit).toBe('404543441b19aa56a1d00210c190b1c06d2d0ffa');
   expect(manifest.repositories.runtime.commit).toBe('2ac11101b4a5ca14694e5d2fa200a4d75dd60f0c');
   expect(manifest.repositories.cli.commit).toBe('e2b99a89baa8dc11521f6762781c5fe918995c5b');
 
