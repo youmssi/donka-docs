@@ -18,10 +18,26 @@ export default async function PrintPage({ params }: PageProps<'/[lang]/print'>) 
         const MDX = page.data.body;
         const components = getMDXComponents({
           a: ({ href, ...props }) => {
-            if (!href || /^(?:[a-z][a-z0-9+.-]*:|\/|#)/i.test(href)) {
-              return <a href={href} {...props} />;
+            if (!href || /^(?:[a-z][a-z0-9+.-]*:|#)/i.test(href)) return <a href={href} {...props} />;
+            const localePrefix = `/${lang}`;
+            const pagePath = page.url.startsWith(`${localePrefix}/docs/`)
+              ? page.url
+              : page.url.startsWith('/docs/') || page.url === '/docs'
+                ? `${localePrefix}${page.url}`
+                : page.url.startsWith(`${localePrefix}/`)
+                  ? `${localePrefix}/docs${page.url.slice(localePrefix.length)}`
+                  : `${localePrefix}/docs${page.url.startsWith('/') ? page.url : `/${page.url}`}`;
+            const basePath = pagePath.endsWith('/') ? pagePath : `${pagePath}/`;
+            const target = new URL(href, new URL(basePath, 'https://docs.invalid'));
+            const lastSegment = target.pathname.split('/').at(-1) ?? '';
+            if (target.pathname === '/docs' || target.pathname.startsWith('/docs/')) {
+              target.pathname = `${localePrefix}${target.pathname}`;
+            } else if (
+              /^\/(?:evidence|trust|architecture|reference)(?:\/|$)/.test(target.pathname) &&
+              !lastSegment.includes('.')
+            ) {
+              target.pathname = `${localePrefix}/docs${target.pathname}`;
             }
-            const target = new URL(href, new URL(page.url, 'https://docs.invalid'));
             return <a href={`${target.pathname}${target.search}${target.hash}`} {...props} />;
           },
         });
