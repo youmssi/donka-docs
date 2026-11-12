@@ -168,7 +168,7 @@ test('review trust evidence and the pinned performance baseline', async ({ page 
   );
   expect(sourceManifestResponse.ok()).toBe(true);
   const sourceManifest = await sourceManifestResponse.json();
-  expect(sourceManifest.repositories.studio.ref).toBe('e1841d368abc48d4373a60dc9aa976f6cf04c93e');
+  expect(sourceManifest.repositories.studio.ref).toBe('68ed122a1e39ca2b54cddd29fd9179cd3388e188');
   expect(sourceManifest.documents.length).toBeGreaterThan(0);
   await expect(page.getByRole('heading', { level: 1, name: trustTitle })).toBeVisible();
   await expect(page.getByText(/self-assessment|autoévaluation/i).first()).toBeVisible();
@@ -214,8 +214,8 @@ test('review references generated from the curated source set', async ({ page },
   expect(manifestResponse.ok()).toBe(true);
   const manifest = await manifestResponse.json();
   expect(manifest.version.id).toBe('development');
-  expect(manifest.repositories.studio.commit).toBe('e1841d368abc48d4373a60dc9aa976f6cf04c93e');
-  expect(manifest.repositories.runtime.commit).toBe('2829c7b690c26168e47a2331ed0d3ddf62a94cae');
+  expect(manifest.repositories.studio.commit).toBe('68ed122a1e39ca2b54cddd29fd9179cd3388e188');
+  expect(manifest.repositories.runtime.commit).toBe('2ac1110d89075dc7b57db9b9f8cd71ec880131c2');
   expect(manifest.repositories.cli.commit).toBe('e2b99a89baa8dc11521f6762781c5fe918995c5b');
 
   await page.goto(`/${locale}/docs/reference/studio-api/`);
