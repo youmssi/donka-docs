@@ -38,6 +38,10 @@ export default async function PrintPage({ params }: PageProps<'/[lang]/print'>) 
             ) {
               target.pathname = `${localePrefix}/docs${target.pathname}`;
             }
+            target.pathname = target.pathname.replace(
+              new RegExp(`^${localePrefix}/docs/docs(?=/|$)`),
+              `${localePrefix}/docs`,
+            );
             return <a href={`${target.pathname}${target.search}${target.hash}`} {...props} />;
           },
         });
