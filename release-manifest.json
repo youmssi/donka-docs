@@ -7,7 +7,7 @@
       "releasedAt": null,
       "repositories": {
         "studio": {
-          "ref": "f9a19fd563e874692f89fa912f27151defd5de09",
+          "ref": "4045434",
           "tag": null
         },
         "runtime": {
