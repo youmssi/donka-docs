@@ -1,4 +1,4 @@
 {
   "title": "Donka documentation",
-  "pages": ["index", "architecture", "getting-started", "integrate", "trust", "performance", "evidence"]
+  "pages": ["index", "architecture", "getting-started", "integrate", "trust", "performance", "reference", "evidence"]
 }

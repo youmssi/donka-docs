@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "build": "node scripts/assemble-sources.mjs && next build",
+    "build": "node scripts/assemble-sources.mjs && next build && node scripts/export-pdfs.mjs",
     "dev": "node scripts/assemble-sources.mjs && next dev",
     "start": "serve out",
     "types:check": "node scripts/assemble-sources.mjs && next typegen && tsc --noEmit",

@@ -2,15 +2,18 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArchitectureDiagram } from '@/components/architecture-diagram';
 import { isLocale, messages } from '@/lib/messages';
+import releaseManifest from '@/release-manifest.json';
 
 export default async function HomePage(props: PageProps<'/[lang]'>) {
   const { lang } = await props.params;
   if (!isLocale(lang)) notFound();
   const t = messages[lang];
+  const currentVersion = releaseManifest.versions.find((version) => version.id === releaseManifest.current);
+  if (!currentVersion) throw new Error(`Unknown current documentation version: ${releaseManifest.current}`);
   return (
     <main id="main-content" className="home-content">
       <header className="home-intro">
-        <p className="version-label">{t.development}</p>
+        <p className="version-label">{currentVersion.label[lang]}</p>
         <h1>{t.title}</h1>
         <p className="home-lead">{t.lead}</p>
         <Link className="primary-link" href={`/${lang}/docs/`}>
@@ -37,6 +40,11 @@ export default async function HomePage(props: PageProps<'/[lang]'>) {
         </dl>
       </section>
       <p className="version-note">{t.versionNote}</p>
+      <p>
+        <a href={`/pdf/donka-${currentVersion.id}-${lang}.pdf`} download>
+          {t.pdf}
+        </a>
+      </p>
     </main>
   );
 }

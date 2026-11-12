@@ -1,0 +1,24 @@
+{
+  "current": "development",
+  "versions": [
+    {
+      "id": "development",
+      "label": { "en": "Development", "fr": "Développement" },
+      "releasedAt": null,
+      "repositories": {
+        "studio": {
+          "ref": "e1841d368abc48d4373a60dc9aa976f6cf04c93e",
+          "tag": null
+        },
+        "runtime": {
+          "ref": "2829c7b690c26168e47a2331ed0d3ddf62a94cae",
+          "tag": null
+        },
+        "cli": {
+          "ref": "e2b99a89baa8dc11521f6762781c5fe918995c5b",
+          "tag": null
+        }
+      }
+    }
+  ]
+}

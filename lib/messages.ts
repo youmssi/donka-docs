@@ -27,8 +27,9 @@ export const messages = {
     fieldkit: 'Fieldkit',
     fieldkitDetail: 'Planned for Phase 2: forms connected to the same input contracts.',
     roadmap: 'Phase 2 · planned',
+    pdf: 'Download the English PDF',
     versionNote:
-      'This preview describes development work. A version selector and downloadable PDF will accompany the release documentation.',
+      'This snapshot pins exact Studio, Runtime and CLI commits. Historic version selection will be available when a complete tagged release set exists.',
     nextTitle: 'Start with the essentials',
     overviewDetail: 'What each product does and who uses it.',
     architectureDetail: 'The data flows, responsibilities and boundaries.',
@@ -62,8 +63,9 @@ export const messages = {
     fieldkit: 'Fieldkit',
     fieldkitDetail: 'Prévu en Phase 2 : des formulaires reliés aux mêmes contrats d’entrée.',
     roadmap: 'Phase 2 · prévu',
+    pdf: 'Télécharger le PDF français',
     versionNote:
-      'Cet aperçu décrit le travail en développement. Un sélecteur de version et un PDF téléchargeable accompagneront la documentation des publications.',
+      'Cet instantané épingle les commits exacts de Studio, Runtime et CLI. La sélection des versions antérieures sera disponible lorsqu’un ensemble complet de publications taguées existera.',
     nextTitle: 'Commencer par l’essentiel',
     overviewDetail: 'Le rôle de chaque produit et de ses utilisateurs.',
     architectureDetail: 'Les flux, les responsabilités et les frontières.',

@@ -14,6 +14,9 @@ Follow Studio's applicable engineering principles and brand rules.
   Chromium, Firefox and WebKit before release.
 - Keep guides and security/performance evidence in their owning product repositories.
   Assemble them at build time in DNK-66 part 2; do not maintain copies here.
+- Every customer-facing product change updates its owning guide in the same story. Regenerate
+  references from the curated release manifest and review their generated diff before opening
+  a pull request; never edit generated references by hand.
 - Do not claim a planned feature, self-assessment, certification, installation
   timing or external security test without its exact evidence and status.
 - Use the locked dependencies and pnpm 10.33.0. In the Donka workspace, invoke

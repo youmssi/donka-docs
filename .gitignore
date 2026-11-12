@@ -6,7 +6,9 @@
 .source
 /.sources/
 /content/docs/evidence/
+/content/docs/reference/
 /public/evidence/
+/public/reference/
 
 # test & build
 /coverage
