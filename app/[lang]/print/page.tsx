@@ -20,7 +20,7 @@ export default async function PrintPage({ params }: PageProps<'/[lang]/print'>) 
           a: ({ href, ...props }) => {
             if (!href || /^(?:[a-z][a-z0-9+.-]*:|#)/i.test(href)) return <a href={href} {...props} />;
             const localePrefix = `/${lang}`;
-            const pagePath = page.url.startsWith(`${localePrefix}/docs/`)
+            const pagePath = page.url.startsWith(`${localePrefix}/docs/`) || page.url === `${localePrefix}/docs`
               ? page.url
               : page.url.startsWith('/docs/') || page.url === '/docs'
                 ? `${localePrefix}${page.url}`
