@@ -53,6 +53,15 @@ test('read the diagram, navigate documentation and search in the current languag
 
   await page.goto('/');
   await page.getByRole('link', { name: locale === 'fr' ? 'Français' : 'English', exact: true }).click();
+  const pdf = page.getByRole('link', {
+    name: locale === 'fr' ? 'Télécharger le PDF français' : 'Download the English PDF',
+  });
+  const pdfHref = await pdf.getAttribute('href');
+  expect(pdfHref).toBe(`/pdf/donka-development-${locale}.pdf`);
+  if (!pdfHref) throw new Error('The documentation PDF link has no target.');
+  const pdfResponse = await page.request.get(new URL(pdfHref, page.url()).toString());
+  expect(pdfResponse.ok()).toBe(true);
+  expect((await pdfResponse.body()).subarray(0, 4).toString()).toBe('%PDF');
   await expect(page.locator('html')).toHaveAttribute('lang', locale);
   await expect(page.locator('html')).toHaveClass(new RegExp(colorScheme));
   await expect(page.getByRole('heading', { level: 1, name: t.home })).toBeVisible();
@@ -159,7 +168,7 @@ test('review trust evidence and the pinned performance baseline', async ({ page 
   );
   expect(sourceManifestResponse.ok()).toBe(true);
   const sourceManifest = await sourceManifestResponse.json();
-  expect(sourceManifest.repositories.studio.ref).toBe('928fd00f479c27eead3f184b54fd5f853f54ae2c');
+  expect(sourceManifest.repositories.studio.ref).toBe('404543441b19aa56a1d00210c190b1c06d2d0ffa');
   expect(sourceManifest.documents.length).toBeGreaterThan(0);
   await expect(page.getByRole('heading', { level: 1, name: trustTitle })).toBeVisible();
   await expect(page.getByText(/self-assessment|autoévaluation/i).first()).toBeVisible();
@@ -173,7 +182,7 @@ test('review trust evidence and the pinned performance baseline', async ({ page 
   if (locale === 'fr') await expect(page.getByText(/English source/)).toBeVisible();
   await expect(page.getByRole('link', { name: /studio\/docs\/security\/asvs\.md/ })).toHaveAttribute(
     'href',
-    /^https:\/\/github\.com\/youmssi\/donka\/blob\/928fd00f/,
+    new RegExp(`^https://github\\.com/youmssi/donka/blob/${sourceManifest.repositories.studio.ref}/`),
   );
   await fitsViewport(page);
 
@@ -197,4 +206,34 @@ test('review trust evidence and the pinned performance baseline', async ({ page 
   await page.screenshot({ path: testInfo.outputPath('performance.png'), fullPage: true });
   await testInfo.attach('Performance', { path: testInfo.outputPath('performance.png'), contentType: 'image/png' });
   expect(errors).toEqual([]);
+});
+
+test('review references generated from the curated source set', async ({ page }, testInfo) => {
+  const { locale } = testInfo.project.metadata as { locale: 'en' | 'fr' };
+  const manifestResponse = await page.request.get('/evidence/source-manifest.json');
+  expect(manifestResponse.ok()).toBe(true);
+  const manifest = await manifestResponse.json();
+  expect(manifest.version.id).toBe('development');
+  expect(manifest.repositories.studio.commit).toBe('404543441b19aa56a1d00210c190b1c06d2d0ffa');
+  expect(manifest.repositories.runtime.commit).toBe('2ac11101b4a5ca14694e5d2fa200a4d75dd60f0c');
+  expect(manifest.repositories.cli.commit).toBe('e2b99a89baa8dc11521f6762781c5fe918995c5b');
+
+  await page.goto(`/${locale}/docs/reference/studio-api/`);
+  await expect(
+    page.getByRole('heading', { level: 1, name: locale === 'fr' ? 'API Studio' : 'Studio API' }),
+  ).toBeVisible();
+  await expect(page.getByText('/health', { exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: /OpenAPI contract|contrat OpenAPI/i })).toHaveAttribute(
+    'href',
+    '/reference/studio-openapi.json',
+  );
+
+  await page.goto(`/${locale}/docs/reference/cli/`);
+  await expect(
+    page.getByRole('heading', { level: 1, name: locale === 'fr' ? 'CLI Donka' : 'Donka CLI' }),
+  ).toBeVisible();
+  await expect(page.getByText(/USAGE form pull \[OPTIONS\]/)).toBeVisible();
+
+  await page.goto(`/${locale}/docs/reference/artifact-format/`);
+  await expect(page.getByRole('heading', { level: 1, name: /Artifact format|Format des artefacts/ })).toBeVisible();
 });

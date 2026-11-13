@@ -4,9 +4,12 @@ Static English/French product documentation built with Fumadocs and Next.js.
 The site is delivered in three DNK-66 parts. Part 1 provides the English/French
 foundation, Discover/Architecture pages, responsive diagram, local search and CI
 checks. Part 2 assembles source guides and security/performance evidence from
-pinned Studio, Runtime and CLI commits. Part 3 will add tagged-release API
-references, version/PDF support and the product repository checks. It does not
-deploy a website.
+pinned Studio, Runtime and CLI commits. Part 3 is in progress: a curated manifest
+pins each documentation version to exact product refs, the build generates
+Studio/Runtime OpenAPI and CLI references, and a static PDF is produced for the
+current version. No tagged Studio release exists yet, so the current entry is the
+development snapshot; historic release selection remains unavailable until
+complete tagged release sets are added. It does not deploy a website.
 
 ## Development
 

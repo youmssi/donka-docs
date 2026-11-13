@@ -50,17 +50,26 @@ jobs:
         run: |
           npm install --prefix .tools --no-package-lock pnpm@10.33.0
           echo "$PWD/.tools/node_modules/.bin" >> "$GITHUB_PATH"
+      - name: Build the tagged CLI command reference
+        run: |
+          pnpm --dir .sources/donka-cli install --frozen-lockfile
+          pnpm --dir .sources/donka-cli build
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec # stable
+      - name: Export the tagged Runtime OpenAPI document
+        run: cargo run --manifest-path .sources/donka-runtime/Cargo.toml --locked --example export-openapi > .sources/donka-runtime/openapi.json
+        env:
+          SERVICE_VERSION: ${{ steps.source_refs.outputs.version }}
       - run: pnpm install --frozen-lockfile
       - run: pnpm format:check
       - run: pnpm lint
       - run: pnpm types:check
       - run: pnpm test
       - run: pnpm audit:security
+      - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm build
         env:
           DONKA_DOCS_SOURCES_DIR: ${{ github.workspace }}/.sources
       - run: pnpm check:links
-      - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
       - name: Browser evidence
         if: always()
