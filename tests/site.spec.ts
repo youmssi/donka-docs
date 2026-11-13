@@ -182,7 +182,7 @@ test('review trust evidence and the pinned performance baseline', async ({ page 
   if (locale === 'fr') await expect(page.getByText(/English source/)).toBeVisible();
   await expect(page.getByRole('link', { name: /studio\/docs\/security\/asvs\.md/ })).toHaveAttribute(
     'href',
-    /^https:\/\/github\.com\/youmssi\/donka\/blob\/f9a19fd/,
+    new RegExp(`^https://github\\.com/youmssi/donka/blob/${sourceManifest.repositories.studio.ref}/`),
   );
   await fitsViewport(page);
 
@@ -232,7 +232,7 @@ test('review references generated from the curated source set', async ({ page },
   await expect(
     page.getByRole('heading', { level: 1, name: locale === 'fr' ? 'CLI Donka' : 'Donka CLI' }),
   ).toBeVisible();
-  await expect(page.getByText('donka form|mcp|pull', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'donka form pull', exact: true })).toBeVisible();
 
   await page.goto(`/${locale}/docs/reference/artifact-format/`);
   await expect(page.getByRole('heading', { level: 1, name: /Artifact format|Format des artefacts/ })).toBeVisible();
