@@ -232,7 +232,7 @@ test('review references generated from the curated source set', async ({ page },
   await expect(
     page.getByRole('heading', { level: 1, name: locale === 'fr' ? 'CLI Donka' : 'Donka CLI' }),
   ).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'donka form pull', exact: true })).toBeVisible();
+  await expect(page.getByText(/USAGE form pull \[OPTIONS\]/)).toBeVisible();
 
   await page.goto(`/${locale}/docs/reference/artifact-format/`);
   await expect(page.getByRole('heading', { level: 1, name: /Artifact format|Format des artefacts/ })).toBeVisible();
