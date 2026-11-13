@@ -7,15 +7,15 @@
       "releasedAt": null,
       "repositories": {
         "studio": {
-          "ref": "404543441b19aa56a1d00210c190b1c06d2d0ffa",
+          "ref": "33c6ecf53c34656d34e08e25af7d63948170b6db",
           "tag": null
         },
         "runtime": {
-          "ref": "2ac11101b4a5ca14694e5d2fa200a4d75dd60f0c",
+          "ref": "7bce7ade75052e93f6683dc76de324a6c9f5d1fd",
           "tag": null
         },
         "cli": {
-          "ref": "e2b99a89baa8dc11521f6762781c5fe918995c5b",
+          "ref": "6b4acee2aef2a2589d4a45d15b6cf80cce8fb91e",
           "tag": null
         }
       }
