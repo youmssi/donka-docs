@@ -1,9 +1,9 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 
-const developmentSources = JSON.parse(
-  readFileSync('release-manifest.json', 'utf8'),
-).versions.find((version: { id: string }) => version.id === 'development').repositories;
+const developmentSources = JSON.parse(readFileSync('release-manifest.json', 'utf8')).versions.find(
+  (version: { id: string }) => version.id === 'development',
+).repositories;
 
 const copy = {
   en: {
