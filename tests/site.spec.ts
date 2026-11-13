@@ -195,9 +195,6 @@ test('review trust evidence and the pinned performance baseline', async ({ page 
   await expect(
     page.getByRole('heading', { level: 1, name: locale === 'fr' ? 'Performances' : 'Performance' }),
   ).toBeVisible();
-  await expect(
-    page.getByText(locale === 'fr' ? /trois fenêtres distinctes de 10 secondes/ : /three separate 10-second windows/),
-  ).toBeVisible();
   const baselineResponse = await page.request.get(
     new URL('/evidence/performance-baseline.json', page.url()).toString(),
   );
@@ -210,6 +207,9 @@ test('review trust evidence and the pinned performance baseline', async ({ page 
   await performanceReport.click();
   await expect(page).toHaveURL(new RegExp(`/${locale}/docs/evidence/operations/performance/$`));
   await expect(page.getByRole('heading', { level: 1, name: /Performance|Performances/ })).toBeVisible();
+  await expect(
+    page.getByText(locale === 'fr' ? /trois fenêtres distinctes de 10 secondes/ : /three separate 10-second windows/),
+  ).toBeVisible();
   await fitsViewport(page);
   await page.screenshot({ path: testInfo.outputPath('performance.png'), fullPage: true });
   await testInfo.attach('Performance', { path: testInfo.outputPath('performance.png'), contentType: 'image/png' });
